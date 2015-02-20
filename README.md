@@ -1,4 +1,4 @@
 # DV_NYDine
 
-2015 Spring Fall--Data Visualization Project.
+2015 Spring --Data Visualization Project.
 
