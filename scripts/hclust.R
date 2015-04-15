@@ -1,0 +1,7 @@
+library()
+setwd("~/Documents/Internships_Projects/Drinkspottr/massive-octo-data/clustering/")
+features_mtx <- read.csv("features_mtx.csv",head=F)
+d <- dist(as.matrix(features_mtx[,c(-1,-2)]))
+hc <- hclust(d) 
+plot(hc)
+View(features_mtx[c(3,8),])
