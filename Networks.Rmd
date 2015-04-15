@@ -1,0 +1,211 @@
+---
+title: "SocialNetwork_assignment1"
+author: "Yu Tian"
+date: "February 24, 2015"
+output: word_document
+---
+
+```{r lemis}
+library(igraph)
+#library(multiplex)
+#library(rjson)
+
+setwd("/Users/yutian/Documents/QMSS/2015spring/SocialNetworkAnalysis/assignment2")
+lesmis <- read.graph("lesmis/lesmis.gml", format = 'gml')
+
+
+#str(lesmis)
+#V(lesmis)$id
+#V(lesmis)$label
+#E(lesmis)$value
+#colnames(E(lesmis))
+#typeof(lesmis)
+#summary(lesmis)
+
+
+plot(lesmis, layout=layout.fruchterman.reingold)
+#graph.data.frame(el, directed=T)
+#g <- graph(lesmis,directed = TRUE)
+
+#load ("result.rda")
+#el <- matrix(lesmis)
+#el[,1] <- as.character(el[,1])
+#el[,2] <- as.character(el[,2])
+#g <- graph.data.frame(el, directed=T)
+
+#c("all", "out", "in", "total")
+#degree(lesmis, v=V(lesmis), mode ="total" )
+#degree(lesmis,mode ="in" )
+#degree(lesmis,mode ="out" )
+graph.density(lesmis)
+
+dgr <- as.numeric(degree(lesmis, loops=T, normalized=T))
+btn <- as.numeric(betweenness(lesmis, directed = F,normalized=T))
+clsn <- as.numeric(closeness(lesmis, mode = c("all"),normalized=T))
+egvct <- evcent(lesmis,directed = F)
+egvct <- as.numeric(egvct$vector)
+
+df_lms <- data.frame(cbind(dgr,btn, clsn, egvct))
+colnames(df_lms) <- c("degree","betweenness", "closeness","eigenvector")
+cor_mtx <- cor(df_lms[,c(1,2,3,4)]) 
+df_lms$name <- V(lesmis)$label
+
+```
+
+```{r yelp: preparing data}
+library(igraph)
+setwd("/Users/yutian/Documents/QMSS/2015spring/DataViz/4NYDine")
+
+# read in attributes
+attrb <- read.csv("data/yelp_network_attribute.csv",header=F,row.names=NULL,check.names=FALSE)
+colnames(attrb) <- c('yelping_since','votes','review_count','user_id','name','fans','average_stars','compliments')
+head(attrb)
+summary(attrb)
+
+# read in adjacency matrix in .csv format
+adj_d <- read.csv("data/yelp_network_adjmtx.csv",header=F,row.names=NULL,check.names=FALSE)
+rowSums(adj_d)
+# convert to matrix and graph
+adj_mtx <- as.matrix(adj_d)
+adj_mtx_g <- graph.adjacency(adj_mtx,mode='undirected',weighted=NULL)
+
+# assign attributes to vertex
+V(adj_mtx_g)$name <- as.character(attrb$name)
+V(adj_mtx_g)$user_id <- as.character(attrb$user_id)
+V(adj_mtx_g)$yelping_since <- attrb$yelping_since
+V(adj_mtx_g)$votes <- attrb$votes
+V(adj_mtx_g)$review_count <- attrb$review_count
+V(adj_mtx_g)$fans <- attrb$fans
+V(adj_mtx_g)$average_stars <- attrb$average_stars
+V(adj_mtx_g)$compliments <- attrb$compliments
+
+```
+
+```{r yelp: overall network}
+plot(adj_mtx_g)
+
+#graph.density(adj_mtx_g)
+#stat <- summary(attrb)
+
+hist(attrb$yelping_since, main="Distribution of starting year on yelp",xlab="year" )
+hist(attrb$votes, main="Distribution of number of votes",xlab="numebr of votes" )
+hist(attrb$review_count, main="Distribution of reviews",xlab="numebr of reviews" )
+hist(attrb$average_stars, main="Distribution of average rating",xlab="average rating" )
+hist(attrb$compliments, main="Distribution of compliments",xlab="number of compliments" )
+hist(attrb$fans, main="Distribution of number of fans",xlab="number of fans" )
+
+#=========
+
+eb <- edge.betweenness.community (adj_mtx_g, directed = F, edge.betweenness = TRUE, merges = TRUE,bridges=TRUE,modularity=TRUE,membership=TRUE) 
+plot(eb,adj_mtx_g)
+
+wt<-walktrap.community(adj_mtx_g,steps=200,modularity=TRUE)#,labels=TRUE) ##run random walk partitioning
+plot(wt,adj_mtx_g) ##plotR-Wpartitioning 
+
+lp=label.propagation.community(adj_mtx_g) ##runlabelpropogationpartitioning 
+plot(lp,adj_mtx_g) ##plotL-Ppartitioning
+
+## compare these methods to each other
+compare(eb, wt, method= c("nmi")) 
+compare(eb, wt, method= c("rand")) 
+compare(eb, wt, method= c("adjusted.rand"))
+
+compare(eb, lp, method= c("nmi")) 
+compare(eb, wt, method= c("rand")) 
+compare(eb, lp, method= c("adjusted.rand"))
+
+## get the results in a dataframe 
+girvan <- data.frame(eb$membership) 
+#fblocks = fBlocks$blocks 
+#str(fblocks)
+rw <- data.frame(wt$membership)
+flpm <- data.frame(lp$membership) 
+
+fd <- cbind(attrb, girvan, rw, lpm) 
+head(fd)
+
+means <- aggregate(fd, by=list(lp$membership), FUN=mean)
+means
+
+fd$rankages <- rank(fd$yelping_since)
+fd$rankageascending = 116-fd$rankages
+head(fd)
+#===========
+
+```
+
+```{r yelp: ego network measurements}
+# measures on vertex
+degree <- degree(adj_mtx_g, loops=T, normalized=T)
+btwn <- betweenness(adj_mtx_g, directed = F,normalized=T)
+close <- closeness(adj_mtx_g, mode = c("all"),normalized=T)
+eigen <- evcent(adj_mtx_g,directed = F)
+alpha_centrality <- alpha.centrality(adj_mtx_g)
+eigen_ctl_scores <- evcent(adj_mtx_g,directed = F)
+
+df <- data.frame(name = attrb$name)
+df <- cbind(df,degree, btwn, close, eigen$vector, alpha_centrality, eigen_ctl_scores$vector, V(adj_mtx_g)$yelping_since,V(adj_mtx_g)$votes, V(adj_mtx_g)$review_count,V(adj_mtx_g)$fans ,V(adj_mtx_g)$average_stars ,V(adj_mtx_g)$compliments)
+#head(df)
+colnames(df) <- c("name", "degree","betweenness", "closeness","eigenvector", "alpha_centrality" ,"eigen_control_scores","yelping_since", "votes", "review_count", "fans", "average_stars", "compliments")
+
+df_ctrl <- df[,c(-6,-7)]
+cor_mtx <- cor(df_ctrl[,c(2,3,4,5)]) 
+
+colnames(df_ctrl)
+
+fit1 <- lm(data = df_ctrl,degree ~ yelping_since + votes + review_count + fans + compliments)
+summary(fit1)
+
+fit1 <- lm(data = df_ctrl,degree ~ yelping_since + votes + fans + compliments)
+summary(fit1)
+
+fit1 <- lm(data = df_ctrl,degree ~ yelping_since + votes + fans)
+summary(fit1)
+
+fit2 <- lm(data = df_ctrl,closeness ~ votes  + fans +compliments)
+summary(fit2)
+fit2 <- lm(data = df_ctrl,closeness ~ votes  + fans +yelping_since+ review_count + compliments)
+summary(fit2)
+
+
+fit3 <- lm(data = df_ctrl,betweenness ~ review_count + fans )
+summary(fit3)
+fit3 <- lm(data = df_ctrl,betweenness ~  fans + yelping_since + votes + compliments)
+summary(fit3)
+
+
+fit4 <- lm(data = df_ctrl,eigenvector ~ fans  )
+summary(fit4)
+fit4 <- lm(data = df_ctrl,eigenvector ~ fans +yelping_since+ votes + review_count + compliments)
+summary(fit4)
+
+#========= )
+# measures on edges
+edge_btwn<- edge.betweenness(adj_mtx_g)
+
+#=========
+```
+
+
+```{r visualization}
+g <- adj_mtx_g
+set.seed(12)
+l <- layout.kamada.kawai(g)
+# shape: earlier than 2006 as "circle", later as "rectangle"
+V(g)[V(g)$yelping_since<2006]$shape <- "circle"
+V(g)[V(g)$yelping_since>2005]$shape <- "rectangle"
+
+# color: 
+V(g)[V(g)$average_stars<3.5]$color <- "black"
+V(g)[V(g)$average_stars>3.5]$color <- "red"
+
+# label color: 
+
+# size: num of compliments
+V(g)$size <- V(g)$fans/60
+
+# lable size: num of fans
+V(g)$label.size <- V(g)$compliments/60
+
+plot(g,layout=l)
+```
