@@ -7,36 +7,12 @@ output: word_document
 
 ```{r lemis}
 library(igraph)
-#library(multiplex)
-#library(rjson)
 
 setwd("/Users/yutian/Documents/QMSS/2015spring/SocialNetworkAnalysis/assignment2")
 lesmis <- read.graph("lesmis/lesmis.gml", format = 'gml')
 
-
-#str(lesmis)
-#V(lesmis)$id
-#V(lesmis)$label
-#E(lesmis)$value
-#colnames(E(lesmis))
-#typeof(lesmis)
-#summary(lesmis)
-
-
 plot(lesmis, layout=layout.fruchterman.reingold)
-#graph.data.frame(el, directed=T)
-#g <- graph(lesmis,directed = TRUE)
 
-#load ("result.rda")
-#el <- matrix(lesmis)
-#el[,1] <- as.character(el[,1])
-#el[,2] <- as.character(el[,2])
-#g <- graph.data.frame(el, directed=T)
-
-#c("all", "out", "in", "total")
-#degree(lesmis, v=V(lesmis), mode ="total" )
-#degree(lesmis,mode ="in" )
-#degree(lesmis,mode ="out" )
 graph.density(lesmis)
 
 dgr <- as.numeric(degree(lesmis, loops=T, normalized=T))
@@ -49,7 +25,6 @@ df_lms <- data.frame(cbind(dgr,btn, clsn, egvct))
 colnames(df_lms) <- c("degree","betweenness", "closeness","eigenvector")
 cor_mtx <- cor(df_lms[,c(1,2,3,4)]) 
 df_lms$name <- V(lesmis)$label
-
 ```
 
 ```{r yelp: preparing data}
@@ -64,7 +39,6 @@ summary(attrb)
 
 # read in adjacency matrix in .csv format
 adj_d <- read.csv("data/yelp_network_adjmtx.csv",header=F,row.names=NULL,check.names=FALSE)
-rowSums(adj_d)
 # convert to matrix and graph
 adj_mtx <- as.matrix(adj_d)
 adj_mtx_g <- graph.adjacency(adj_mtx,mode='undirected',weighted=NULL)
@@ -82,10 +56,9 @@ V(adj_mtx_g)$compliments <- attrb$compliments
 ```
 
 ```{r yelp: overall network}
-plot(adj_mtx_g)
+plot(adj_mtx_g, layout=layout.fruchterman.reingold)
 
-#graph.density(adj_mtx_g)
-#stat <- summary(attrb)
+graph.density(adj_mtx_g)
 
 hist(attrb$yelping_since, main="Distribution of starting year on yelp",xlab="year" )
 hist(attrb$votes, main="Distribution of number of votes",xlab="numebr of votes" )
@@ -94,7 +67,6 @@ hist(attrb$average_stars, main="Distribution of average rating",xlab="average ra
 hist(attrb$compliments, main="Distribution of compliments",xlab="number of compliments" )
 hist(attrb$fans, main="Distribution of number of fans",xlab="number of fans" )
 
-#=========
 
 eb <- edge.betweenness.community (adj_mtx_g, directed = F, edge.betweenness = TRUE, merges = TRUE,bridges=TRUE,modularity=TRUE,membership=TRUE) 
 plot(eb,adj_mtx_g)
@@ -116,22 +88,10 @@ compare(eb, lp, method= c("adjusted.rand"))
 
 ## get the results in a dataframe 
 girvan <- data.frame(eb$membership) 
-#fblocks = fBlocks$blocks 
-#str(fblocks)
 rw <- data.frame(wt$membership)
-flpm <- data.frame(lp$membership) 
+lpm <- data.frame(lp$membership) 
 
 fd <- cbind(attrb, girvan, rw, lpm) 
-head(fd)
-
-means <- aggregate(fd, by=list(lp$membership), FUN=mean)
-means
-
-fd$rankages <- rank(fd$yelping_since)
-fd$rankageascending = 116-fd$rankages
-head(fd)
-#===========
-
 ```
 
 ```{r yelp: ego network measurements}
@@ -179,33 +139,26 @@ summary(fit4)
 fit4 <- lm(data = df_ctrl,eigenvector ~ fans +yelping_since+ votes + review_count + compliments)
 summary(fit4)
 
-#========= )
-# measures on edges
-edge_btwn<- edge.betweenness(adj_mtx_g)
-
-#=========
 ```
 
 
-```{r visualization}
+```{r visualize}
 g <- adj_mtx_g
 set.seed(12)
 l <- layout.kamada.kawai(g)
 # shape: earlier than 2006 as "circle", later as "rectangle"
 V(g)[V(g)$yelping_since<2006]$shape <- "circle"
-V(g)[V(g)$yelping_since>2005]$shape <- "rectangle"
+V(g)[V(g)$yelping_since>2005]$shape <- "square"
 
 # color: 
-V(g)[V(g)$average_stars<3.5]$color <- "black"
-V(g)[V(g)$average_stars>3.5]$color <- "red"
+V(g)[V(g)$compliments<500]$color <- "black"
+V(g)[V(g)$compliments>500]$color <- "red"
 
-# label color: 
+# size: num of fans
+V(g)$size <- sqrt(V(g)$fans)/2
 
-# size: num of compliments
-V(g)$size <- V(g)$fans/60
-
-# lable size: num of fans
-V(g)$label.size <- V(g)$compliments/60
+# lable size: average star
+V(g)$label.size <- sqrt(5^(V(g)$average_stars))
 
 plot(g,layout=l)
 ```
