@@ -20,7 +20,7 @@ We focus on customer reviews for restaurants， applying topic modeling on revie
 **Our datasets:**
 * yelp_academic_dataset_business.json
 * yelp_academic_dataset_reviews.json
-** Prepare data:
+** Prepare data:**
 * Convert json to csv:
 
 ```
@@ -82,7 +82,7 @@ cat("Testing set: "); print(dim(data_review_restaurant.test))
 
 ##3. LDA
 **Split the dataset into training data and testing data, get the top 30 topic:**
-
+```
 import os
 import re
 from gensim import corpora, models, similarities
@@ -153,6 +153,7 @@ else:
         print line
     f.close()
 ```
+
 * Top 30 topics:
 Topic 1: beer, selection, beers, tap, local, draft, cold, bar, ale, pies
 Topic 2: location, times, years, new, still, since, few, last, used, time
@@ -225,12 +226,13 @@ def generate_topic_dist_matrix(corpus, all_dist, star):
         topic_dist[highest_topic] += 1
     return topic_dist, all_dist
  ```
+ 
 * Topic proportion for star one to star five:
 Topic distribution for 5-star reviews in test set:  [97, 1056, 1601, 10, 96, 812, 181, 378, 5113, 3, 1185, 307, 338, 2200, 108, 154, 5, 1803, 957, 13, 1808, 15, 11597, 1155, 2017, 1887, 146, 347, 64, 399]
 Topic distribution for 4-star reviews in test set:  [95, 1176, 2389, 7, 119, 1168, 145, 455, 3967, 2, 1113, 339, 387, 3313, 109, 220, 6, 3197, 987, 13, 3636, 13, 6485, 1432, 2654, 2543, 130, 234, 72, 277]
 Topic distribution for 3-star reviews in test set:  [77, 1421, 2805, 8, 96, 976, 92, 384, 2670, 1, 880, 237, 249, 6736, 93, 217, 6, 7412, 776, 20, 3785, 10, 2600, 1052, 1651, 2559, 89, 125, 93, 253]
 Topic distribution for 2-star reviews in test set:  [39, 1441, 2801, 13, 56, 631, 39, 212, 1810, 0, 796, 224, 138, 13362, 111, 138, 1, 8666, 603, 5, 1802, 4, 1037, 448, 940, 1852, 60, 67, 76, 316]
 Topic distribution for 1-star reviews in test set:  [21, 1294, 1779, 35, 26, 329, 20, 143, 693, 2, 621, 114, 90, 21319, 92, 105, 5, 6071, 381, 0, 903, 9, 477, 197, 445, 975, 37, 36, 59, 892]
-**Visualize topic proportion for every star by shiny:
+**Visualize topic proportion for every star by shiny:**
   [wordcloud]: https://claire-yl3296-presentation.shinyapps.io/wordcloud/
 
