@@ -15,7 +15,7 @@ We focus on customer reviews for restaurants，applying LDA on reviews data.
 * Unsupervised machine learning based on text data
 * One of the most useful algorithm__LDA
 
-** LDA:**
+**LDA:**
 * A collection of distributions on words (topics).
 * A distribution on topics for each document(star).
 
