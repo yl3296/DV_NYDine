@@ -15,7 +15,7 @@ We focus on customer reviews for restaurants，applying LDA on reviews data.
 * Unsupervised machine learning based on text data
 * One of the most useful algorithm__LDA
 
-**LDA:**
+** LDA:**
 * A collection of distributions on words (topics).
 * A distribution on topics for each document(star).
 
@@ -101,9 +101,8 @@ stoplist = set('came way dad yes try oh phoenix one two three four th alot well 
 # LDA, k number of topics
 k = 30
 
-# If LDA model doesn't exist already...
+# Training LDA...
 if not os.path.isfile('LDA/lda_model'):
-    # Do everything
     print "Generating LDA model..."
     if not os.path.exists('LDA'):
         os.mkdir('LDA')
@@ -111,11 +110,8 @@ if not os.path.isfile('LDA/lda_model'):
     for review in data_review_restaurant_train:
         # Only care about documents of certain length
         if (len(review) > 100):
-            # Remove punctuations
             review = re.sub(r'[^a-zA-Z]', ' ', review)
-            # To lowercase
             review = review.lower()
-            # Remove stop words
             texts = [word for word in review.lower().split() if word not in stoplist]
             try:
                 corpus.append(texts)
@@ -209,7 +205,32 @@ def generate_topic_dist_matrix(corpus, all_dist, star):
         all_dist.append(temp)
         topic_dist[highest_topic] += 1
     return topic_dist, all_dist
- ```
+    
+ # Process the reviews
+corpus_5stars = process_reviews(train_5stars)
+corpus_4stars = process_reviews(train_4stars)
+corpus_3stars = process_reviews(train_3stars)
+corpus_2stars = process_reviews(train_2stars)
+corpus_1stars = process_reviews(train_1stars)
+
+# Apply testing set to model
+# Build an list of list to store topic distribution, will convert to dataframe later
+topic_dist_list = []
+
+# Keep a separate list to count topics
+topic_dist_5stars = []
+topic_dist_4stars = []
+topic_dist_3stars = []
+topic_dist_2stars = []
+topic_dist_1stars = []
+
+topic_dist_5stars, topic_dist_list = generate_topic_dist_matrix(corpus_5stars, topic_dist_list, 5)
+topic_dist_4stars, topic_dist_list = generate_topic_dist_matrix(corpus_4stars, topic_dist_list, 4)
+topic_dist_3stars, topic_dist_list = generate_topic_dist_matrix(corpus_3stars, topic_dist_list, 3)
+topic_dist_2stars, topic_dist_list = generate_topic_dist_matrix(corpus_2stars, topic_dist_list, 2)
+topic_dist_1stars, topic_dist_list = generate_topic_dist_matrix(corpus_1stars, topic_dist_list, 1)
+
+```
  
 * Topic proportion for star one to star five:
 ```
