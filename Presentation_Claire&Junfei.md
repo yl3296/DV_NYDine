@@ -1,6 +1,6 @@
 ---
-author: Yang Liu(yl3296), Junfei Shen(js4567)
 title: Final Project Presentation - topic modeling with LDA and visualization
+author: Yang Liu(yl3296), Junfei Shen(js4567)
 date: Thursday, April 23, 2015
 layout: post
 output: md
@@ -10,7 +10,7 @@ tags: yelp reviews, topic modeling, wordcloud, shiny, network, gephi
 
 
 ##1. Introduction
-We focus on customer reviews for restaurants，applying LDA on reviews data.Then we can get:1. word distritbuion on every restaurant review; 2. 
+We focus on customer reviews for restaurants，applying LDA on reviews data.
 
 **Topic model:**
 * Unsupervised machine learning based on text data
@@ -85,7 +85,7 @@ cat("Testing set: "); print(dim(data_review_restaurant.test))
 ```
 
 ##3. LDA
-**Split the dataset into training data and testing data, get the top 30 topic:**
+**Split the dataset into training data and testing data, get the top 30 topics:**
 ```
 import os
 import re
@@ -159,6 +159,7 @@ else:
 ```
 
 * Top 30 topics:
+```
 Topic 1: beer, selection, beers, tap, local, draft, cold, bar, ale, pies
 Topic 2: location, times, years, new, still, since, few, last, used, time
 Topic 3: chicken, sauce, fried, pork, rice, beef, flavor, meat, bbq, shrimp
@@ -168,7 +169,6 @@ Topic 5: pho, spring, vietnamese, rolls, vegas, san, broth, mi, best, bowl
 ...
 ```
 
-    
 **Get topic proportion for every star**
 
 ```
