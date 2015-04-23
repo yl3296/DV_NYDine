@@ -1,10 +1,13 @@
 ---
-author: Yang Liu (yl3296)
-title: lda_yelpreview
+author: "Yang Liu(yl3296)" "Junfei Shen(js4567)"
+title: "Final Project Presentation - topic modeling with LDA and visualization"
+date: "Thursday, April 23, 2015"
 layout: post
 output: md
-description: Apply LDA on yelp review and virsualize by word cloud
+description: Final Project
+tags: yelp reviews, topic modeling, wordcloud, shiny, network, gephi
 ---
+
 
 ##1. Introduction
 We focus on customer reviews for restaurants，applying LDA on reviews data.Then we can get:1. word distritbuion on every restaurant review; 2. 
