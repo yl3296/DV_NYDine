@@ -24,13 +24,14 @@ We focus on customer reviews for restaurants， applying topic modeling on revie
 * Convert json to csv:
 
 ```
+#Convert a json string to a flat python dictionary which can be passed into Pandas.
+
 import json
 import pandas as pd
 from glob import glob
  
 def convert(x):
-    ''' Convert a json string to a flat python dictionary
-    which can be passed into Pandas. '''
+
     ob = json.loads(x)
     for k, v in ob.items():
         if isinstance(v, list):
@@ -76,6 +77,7 @@ cat("Testing set: "); print(dim(data_review_restaurant.test))
 * Key code in getting top 30 topics.
   Each topic has 10 key words. 
   Words in each topic are ordered by decreasing order by frequency.
+  
 ```
 import os
 import re
