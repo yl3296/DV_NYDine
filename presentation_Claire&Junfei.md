@@ -233,7 +233,8 @@ Topic distribution for 4-star reviews in test set:  [95, 1176, 2389, 7, 119, 116
 Topic distribution for 3-star reviews in test set:  [77, 1421, 2805, 8, 96, 976, 92, 384, 2670, 1, 880, 237, 249, 6736, 93, 217, 6, 7412, 776, 20, 3785, 10, 2600, 1052, 1651, 2559, 89, 125, 93, 253]
 Topic distribution for 2-star reviews in test set:  [39, 1441, 2801, 13, 56, 631, 39, 212, 1810, 0, 796, 224, 138, 13362, 111, 138, 1, 8666, 603, 5, 1802, 4, 1037, 448, 940, 1852, 60, 67, 76, 316]
 Topic distribution for 1-star reviews in test set:  [21, 1294, 1779, 35, 26, 329, 20, 143, 693, 2, 621, 114, 90, 21319, 92, 105, 5, 6071, 381, 0, 903, 9, 477, 197, 445, 975, 37, 36, 59, 892]
+
 **Visualize topic proportion for every star by shiny:**
 
-#[wordcloud]: (https://claire-yl3296-presentation.shinyapps.io/wordcloud/)
+#####[wordcloud]: (https://claire-yl3296-presentation.shinyapps.io/wordcloud/)
 
