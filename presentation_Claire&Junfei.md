@@ -237,8 +237,9 @@ Topic distribution for 1-star reviews in test set:  [21, 1294, 1779, 35, 26, 329
 ```
 
 **Visualize topic proportion for every star by shiny:**
+![wordcloud](https://cloud.githubusercontent.com/assets/10662777/7301460/c37b118e-e9b0-11e4-9d67-8a95394cb60e.png)
 
-#####[wordcloud]: (https://claire-yl3296-presentation.shinyapps.io/wordcloud/)
+#####[To wordcloud shinyapps]: (https://claire-yl3296-presentation.shinyapps.io/wordcloud/)
 * Given each star, we can clearly see the key words.
 * Interative: Star, Minimum frequency and Maximum Number of Words can be customized.
 * Nice way to visualize text mining.
