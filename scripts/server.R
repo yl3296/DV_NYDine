@@ -26,4 +26,3 @@ function(input, output, session) {
                   colors=brewer.pal(8, "Dark2"))
   })
 }
-```
