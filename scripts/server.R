@@ -1,4 +1,5 @@
-```
+__author__ = 'Yang Liu(yl3296)'
+
 ##Shiny apps showing restaurant reviews on top 30 topics.
 
 function(input, output, session) {
