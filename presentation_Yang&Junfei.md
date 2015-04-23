@@ -5,18 +5,7 @@ date: "Thursday, April 23, 2015"
 output: html_document
 layout: post
 description: Final Project
-tags: topic modeling, word cloud, shiny, yelp
----
-
-
----
-title: "Final Project Presentation - network and clustering"
-author: "Yu Tian"
-date: "Thursday, April 23, 2015"
-output: html_document
-layout: post
-description: Final Project
-tags: network, clustering, yelp
+tags: topic modeling, wordcloud, shiny, yelp
 ---
 
 
