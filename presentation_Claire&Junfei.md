@@ -7,7 +7,13 @@ layout: post
 description: Final Project
 tags: topic modeling, wordcloud, shiny, yelp
 ---
-
+---
+author: Yang Liu (yl3296)
+title: lda_yelpreview
+layout: post
+output: md
+description: Apply LDA on yelp review and virsualize by word cloud
+---
 
 ##1. Introduction
 --------
