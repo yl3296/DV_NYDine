@@ -242,7 +242,7 @@ Topic distribution for 4-star reviews in test set:  [95, 1176, 2389, 7, 119, 116
 **Visualize topic proportion for every star by shiny:**
 ![wordcloud](https://cloud.githubusercontent.com/assets/10662777/7301460/c37b118e-e9b0-11e4-9d67-8a95394cb60e.png)
 
-#####[To wordcloud shinyapps]: (https://claire-yl3296-presentation.shinyapps.io/wordcloud/)
+#####[To wordcloud shinyapps](https://claire-yl3296-presentation.shinyapps.io/wordcloud/)
 * Given each star, we can clearly see the key words.
 * Interative: Star, Minimum frequency and Maximum Number of Words can be customized.
 * Nice way to visualize text mining.
@@ -328,5 +328,13 @@ fluidPage(
 )
 
 ```
+![dist](https://github.com/shenjunfei/DV_NYDine/blob/master/fig/dist.png)
+![bar1](https://github.com/shenjunfei/DV_NYDine/blob/master/fig/bar1.png)
+![bar2](https://github.com/shenjunfei/DV_NYDine/blob/master/fig/bar2.png)
+![bar3](https://github.com/shenjunfei/DV_NYDine/blob/master/fig/bar3.png)
+![bar4](https://github.com/shenjunfei/DV_NYDine/blob/master/fig/bar4.png)
+![bar5](https://github.com/shenjunfei/DV_NYDine/blob/master/fig/bar5.png)
+
 **Visualize network:**
+![network](https://github.com/shenjunfei/DV_NYDine/blob/master/fig/net2.png)
 
