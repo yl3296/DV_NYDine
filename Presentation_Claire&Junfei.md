@@ -2,7 +2,7 @@
 author: "Yang Liu(yl3296)" "Junfei Shen(js4567)"
 title: "Final Project Presentation - topic modeling with LDA and visualization"
 date: "Thursday, April 23, 2015"
-layout: post
+layout: pres
 output: md
 description: Final Project
 tags: yelp reviews, topic modeling, wordcloud, shiny, network, gephi
