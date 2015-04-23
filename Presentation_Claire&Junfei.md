@@ -1,7 +1,7 @@
 ---
-author: "Yang Liu(yl3296)" "Junfei Shen(js4567)"
-title: "Final Project Presentation - topic modeling with LDA and visualization"
-date: "Thursday, April 23, 2015"
+author: Yang Liu(yl3296), Junfei Shen(js4567)
+title: Final Project Presentation - topic modeling with LDA and visualization
+date: Thursday, April 23, 2015
 layout: post
 output: md
 description: Final Project
