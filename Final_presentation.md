@@ -1,4 +1,3 @@
-
 ---
 title: "Final Project Presentation - topic modeling with LDA and visualization"
 author: "Yang Liu(yl3296)" "Junfei Shen(js4567)"
