@@ -15,6 +15,7 @@ We focus on customer reviews for restaurants，applying LDA on reviews data.
 **Topic model:**
 * Unsupervised machine learning based on text data
 * One of the most useful algorithm__LDA
+
 ** LDA:**
 * A collection of distributions on words (topics).
 * A distribution on topics for each document(star).
@@ -53,6 +54,7 @@ for json_filename in glob('*.json'):
     df.to_csv(csv_filename, encoding='utf-8', index=False)
 
 ```
+
 * Read in R and data preprocessing:
 
 ```
