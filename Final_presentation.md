@@ -8,6 +8,18 @@ description: Final Project
 tags: topic modeling, word cloud, shiny, yelp
 ---
 
+
+---
+title: "Final Project Presentation - network and clustering"
+author: "Yu Tian"
+date: "Thursday, April 23, 2015"
+output: html_document
+layout: post
+description: Final Project
+tags: network, clustering, yelp
+---
+
+
 ##1. Introduction
 --------
 We focus on customer reviews for restaurants， applying topic modeling on reviews data.
