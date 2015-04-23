@@ -1,5 +1,5 @@
 ---
-title: Final Project Presentation - topic modeling with LDA and visualization
+title: Final Project Presentation - Topic modeling with LDA and visualization
 author: Yang Liu(yl3296), Junfei Shen(js4567)
 date: Thursday, April 23, 2015
 layout: post
@@ -20,7 +20,7 @@ We focus on customer reviews for restaurants，applying LDA on reviews data.
 * A distribution on topics for each document(star).
 
 
-##2. Prepare data
+##2. Data Preparation
 **Our datasets:**
 * yelp_academic_dataset_business.json
 * yelp_academic_dataset_reviews.json
