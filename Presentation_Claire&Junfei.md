@@ -4,7 +4,6 @@ author: Yang Liu(yl3296), Junfei Shen(js4567)
 date: Thursday, April 23, 2015
 layout: post
 output: md
-description: Final Project
 tags: yelp reviews, topic modeling, wordcloud, shiny, network, gephi
 ---
 
