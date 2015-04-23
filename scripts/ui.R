@@ -1,4 +1,4 @@
-__author__ = 'Yang Liu(yl3296)'
+'__author__' = 'Yang Liu(yl3296)'
 
 fluidPage(
   # Application title
