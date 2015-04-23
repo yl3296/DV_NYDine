@@ -1,4 +1,4 @@
-__author__ = 'Yang Liu(yl3296)'
+_author_ = 'Yang Liu(yl3296)'
 
 ##Shiny apps showing restaurant reviews on top 30 topics.
 
