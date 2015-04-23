@@ -84,7 +84,7 @@ cat("Testing set: "); print(dim(data_review_restaurant.test))
   Words in each topic are ordered by decreasing order by frequency.
   
 ```
-
+[<img src="https://github.com/shenjunfei/DV_NYDine/blob/master/fig/map3.png">](http://rpubs.com/shenjunfei/74959)
 ##3. LDA
 **Split the dataset into training data and testing data, get the top 30 topics:**
 ```
