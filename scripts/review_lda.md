@@ -7,4 +7,3 @@ description: Apply LDA on yelp review and virsualize by word cloud
 ---
 
 #[LDA_yelpreview](http://file:///Users/ClaireL/Downloads/yl3296_lda_yelpreview-2.html)
-#[D3.js Mapping Presentation](http://stat4701-edav-d3.github.io/)
