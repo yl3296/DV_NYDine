@@ -5,19 +5,18 @@ date: "Thursday, April 23, 2015"
 layout: post
 output: md
 description: Final Project
-tags: topic modeling, wordcloud, shiny, yelp
+tags: yelp reviews, topic modeling, wordcloud, shiny, network, gephi
 ---
 
 ##1. Introduction
---------
-We focus on customer reviews for restaurants， applying topic modeling on reviews data.
+We focus on customer reviews for restaurants，applying LDA on reviews data.Then we can get:1. word distritbuion on every restaurant review; 2. 
 
 **Topic model:**
 * Unsupervised machine learning based on text data
 * One of the most useful algorithm__LDA
 ** LDA:**
 * A collection of distributions on words (topics).
-* A distribution on topics for each document.
+* A distribution on topics for each document(star).
 
 
 ##2. Prepare data
